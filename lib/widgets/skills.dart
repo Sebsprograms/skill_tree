@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/models/task.dart';
+import 'package:skill_tree/widgets/skill_card/skill_card.dart';
 
 class Skills extends StatefulWidget {
-  Skills({super.key});
+  const Skills({super.key});
 
   @override
   State<Skills> createState() {
@@ -10,6 +13,37 @@ class Skills extends StatefulWidget {
 }
 
 class _SkillsState extends State<Skills> {
+  List<Skill> testSkills = [
+    Skill(title: "Programming", tasks: [
+      Task(name: "Practice", exp: 10),
+      Task(name: "Complete Project", exp: 50),
+      Task(name: "Complete Milestone", exp: 100),
+    ]),
+    Skill(title: "Work out", tasks: [
+      Task(name: "Train 1hr", exp: 10),
+      Task(name: "1 week consistent", exp: 70),
+    ]),
+    Skill(title: "Business", tasks: [
+      Task(name: "Make income", exp: 10),
+      Task(name: "New Product", exp: 170),
+      Task(name: "New Client", exp: 30),
+    ]),
+  ];
+
+  void increaseExp(String skillId, String taskId) {
+    for (Skill skill in testSkills) {
+      if (skill.id == skillId) {
+        for (Task task in skill.tasks) {
+          if (task.id == taskId) {
+            setState(() {
+              skill.increaseExpUsingTasks(taskId);
+            });
+          }
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,28 +59,14 @@ class _SkillsState extends State<Skills> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Test Text"),
-            SizedBox(
-              height: 12,
-            ),
-            ElevatedButton(onPressed: () {}, child: Text("Test Button")),
-            SizedBox(
-              height: 12,
-            ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Test card"),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text("Text Button"),
-            ),
+            ...testSkills
+                .map((skill) => SkillCard(
+                      skill: skill,
+                      increaseExp: increaseExp,
+                    ))
+                .toList(),
           ],
         ),
       ),
