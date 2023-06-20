@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/models/task.dart';
+import 'package:skill_tree/widgets/new_skill/new_skill_form.dart';
 import 'package:skill_tree/widgets/skill_card/skill_card.dart';
 
 class Skills extends StatefulWidget {
@@ -44,6 +45,13 @@ class _SkillsState extends State<Skills> {
     }
   }
 
+  void openNewSkillForm() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => NewSkillForm(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +59,7 @@ class _SkillsState extends State<Skills> {
         title: const Text("Skill Tree"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: openNewSkillForm,
             icon: const Icon(Icons.add_box_rounded),
           ),
         ],
