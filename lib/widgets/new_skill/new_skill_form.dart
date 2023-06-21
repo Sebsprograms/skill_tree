@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/widgets/new_skill/new_task.dart';
 
 class NewSkillForm extends StatefulWidget {
@@ -10,6 +11,31 @@ class NewSkillForm extends StatefulWidget {
 
 class _NewSkillFormState extends State<NewSkillForm> {
   final skillNameController = TextEditingController();
+  final List<NewTask> tasks = [];
+  @override
+  void initState() {
+    super.initState();
+    tasks.add(NewTask(
+      deleteTask: deleteTask,
+      id: uuid.v4(),
+    ));
+  }
+
+  addTask() {
+    setState(() {
+      tasks.add(NewTask(
+        deleteTask: deleteTask,
+        id: uuid.v4(),
+      ));
+      print(uuid.v4());
+    });
+  }
+
+  deleteTask(String id) {
+    setState(() {
+      tasks.removeWhere((element) => element.id == id);
+    });
+  }
 
   @override
   void dispose() {
@@ -36,10 +62,36 @@ class _NewSkillFormState extends State<NewSkillForm> {
           const SizedBox(
             height: 8,
           ),
-          NewTask(),
+          ...tasks,
+          const SizedBox(
+            height: 8,
+          ),
+          ElevatedButton.icon(
+            onPressed: addTask,
+            icon: const Icon(Icons.add),
+            label: const Text("Add Task"),
+          ),
           const SizedBox(
             height: 16,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("Create Skill"),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
+          )
         ],
       ),
     );
