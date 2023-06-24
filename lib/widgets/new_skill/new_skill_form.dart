@@ -116,10 +116,10 @@ class _NewSkillFormState extends State<NewSkillForm> {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.pop(context);
                     widget.addSkill(
                       Skill(title: skillNameController.text, tasks: tasks),
                     );
-                    Navigator.pop(context);
                   },
                   child: const Text("Create Skill"),
                 ),
