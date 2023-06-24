@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/models/task.dart';
 import 'package:skill_tree/widgets/new_skill/new_task.dart';
 
 class NewSkillForm extends StatefulWidget {
-  const NewSkillForm({super.key});
+  const NewSkillForm({
+    super.key,
+    required this.addSkill,
+  });
+
+  final void Function(Skill skill) addSkill;
 
   @override
   State<NewSkillForm> createState() => _NewSkillFormState();
@@ -11,88 +17,125 @@ class NewSkillForm extends StatefulWidget {
 
 class _NewSkillFormState extends State<NewSkillForm> {
   final skillNameController = TextEditingController();
-  final List<NewTask> tasks = [];
+  List<Task> tasks = [];
   @override
   void initState() {
     super.initState();
-    tasks.add(NewTask(
-      deleteTask: deleteTask,
-      id: uuid.v4(),
-    ));
+    tasks.add(Task());
   }
 
   addTask() {
     setState(() {
-      tasks.add(NewTask(
-        deleteTask: deleteTask,
-        id: uuid.v4(),
-      ));
-      print(uuid.v4());
+      tasks.add(Task());
+    });
+  }
+
+  editTaskName(String id, String name) {
+    setState(() {
+      tasks = tasks.map((task) {
+        if (task.id == id) {
+          task.name = name;
+        }
+        return task;
+      }).toList();
+    });
+  }
+
+  editTaskExp(String id, String exp) {
+    setState(() {
+      tasks = tasks.map((task) {
+        if (task.id == id) {
+          task.exp = int.tryParse(exp) ?? 0;
+        }
+        return task;
+      }).toList();
     });
   }
 
   deleteTask(String id) {
     setState(() {
-      tasks.removeWhere((element) => element.id == id);
+      tasks.removeWhere((task) => task.id == id);
     });
   }
 
   @override
   void dispose() {
     skillNameController.dispose();
+    for (Task task in tasks) {
+      task.nameController.dispose();
+      task.expController.dispose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          TextField(
-            controller: skillNameController,
-            decoration: const InputDecoration(
-              hintText: "Skill Name",
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextField(
+              controller: skillNameController,
+              decoration: const InputDecoration(
+                hintText: "Skill Name",
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Text("Tasks"),
-          const SizedBox(
-            height: 8,
-          ),
-          ...tasks,
-          const SizedBox(
-            height: 8,
-          ),
-          ElevatedButton.icon(
-            onPressed: addTask,
-            icon: const Icon(Icons.add),
-            label: const Text("Add Task"),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Create Skill"),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  ...tasks
+                      .map((task) => NewTask(
+                            deleteTask: deleteTask,
+                            editTaskName: editTaskName,
+                            editTaskExp: editTaskExp,
+                            task: task,
+                          ))
+                      .toList(),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: addTask,
+                    icon: const Icon(Icons.add),
+                    label: const Text("Add Task"),
+                  ),
+                ]),
               ),
-              const SizedBox(
-                width: 16,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
-              ),
-            ],
-          )
-        ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    widget.addSkill(
+                      Skill(title: skillNameController.text, tasks: tasks),
+                    );
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Create Skill"),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel"),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:skill_tree/models/task.dart';
 
 class NewTask extends StatefulWidget {
-  const NewTask({super.key, required this.deleteTask, required this.id});
+  const NewTask({
+    super.key,
+    required this.task,
+    required this.deleteTask,
+    required this.editTaskName,
+    required this.editTaskExp,
+  });
 
+  final Task task;
   final void Function(String id) deleteTask;
-  final String id;
+  final void Function(String id, String name) editTaskName;
+  final void Function(String id, String exp) editTaskExp;
 
   @override
   State<NewTask> createState() => _NewTaskState();
 }
 
 class _NewTaskState extends State<NewTask> {
-  final taskNameController = TextEditingController();
-  final expController = TextEditingController();
-
-  @override
-  void dispose() {
-    taskNameController.dispose();
-    expController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +33,10 @@ class _NewTaskState extends State<NewTask> {
         children: [
           Expanded(
             child: TextField(
-              controller: taskNameController,
+              controller: widget.task.nameController,
+              onChanged: (String name) {
+                widget.editTaskName(widget.task.id, name);
+              },
               decoration: const InputDecoration(
                 hintText: "Task Name",
               ),
@@ -46,7 +48,10 @@ class _NewTaskState extends State<NewTask> {
           SizedBox(
             width: 100,
             child: TextField(
-              controller: expController,
+              controller: widget.task.expController,
+              onChanged: (String exp) {
+                widget.editTaskExp(widget.task.id, exp);
+              },
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: "Exp Value",
@@ -58,7 +63,7 @@ class _NewTaskState extends State<NewTask> {
           ),
           IconButton(
               onPressed: () {
-                widget.deleteTask(widget.id);
+                widget.deleteTask(widget.task.id);
               },
               icon: const Icon(Icons.delete))
         ],

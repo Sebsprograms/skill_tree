@@ -14,7 +14,7 @@ class Skills extends StatefulWidget {
 }
 
 class _SkillsState extends State<Skills> {
-  List<Skill> testSkills = [
+  List<Skill> skills = [
     Skill(title: "Programming", tasks: [
       Task(name: "Practice", exp: 10),
       Task(name: "Complete Project", exp: 50),
@@ -32,7 +32,7 @@ class _SkillsState extends State<Skills> {
   ];
 
   void increaseExp(String skillId, String taskId) {
-    for (Skill skill in testSkills) {
+    for (Skill skill in skills) {
       if (skill.id == skillId) {
         for (Task task in skill.tasks) {
           if (task.id == taskId) {
@@ -45,10 +45,19 @@ class _SkillsState extends State<Skills> {
     }
   }
 
+  void addSkill(Skill skill) {
+    setState(() {
+      skills.add(skill);
+    });
+  }
+
   void openNewSkillForm() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (context) => NewSkillForm(),
+      builder: (context) => NewSkillForm(
+        addSkill: addSkill,
+      ),
     );
   }
 
@@ -64,18 +73,19 @@ class _SkillsState extends State<Skills> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ...testSkills
-                .map((skill) => SkillCard(
-                      skill: skill,
-                      increaseExp: increaseExp,
-                    ))
-                .toList(),
-          ],
+      body: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ...skills
+                  .map((skill) => SkillCard(
+                        skill: skill,
+                        increaseExp: increaseExp,
+                      ))
+                  .toList(),
+            ],
+          ),
         ),
       ),
     );
