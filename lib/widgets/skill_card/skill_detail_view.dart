@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/widgets/skill_card/exp_bar.dart';
 import 'package:skill_tree/widgets/skill_card/task/task_item.dart';
 
 class SkillDetailView extends StatelessWidget {
@@ -64,11 +65,7 @@ class SkillDetailView extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Container(
-              color: Colors.green,
-              width: double.infinity,
-              height: 20,
-            ),
+            ExpBar(fill: skill.currentExp / skill.expToNextLvl),
             const SizedBox(
               height: 16,
             ),
