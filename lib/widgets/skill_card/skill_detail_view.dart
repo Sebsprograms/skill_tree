@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/widgets/skill_card/task/task_item.dart';
+
+class SkillDetailView extends StatelessWidget {
+  const SkillDetailView({
+    super.key,
+    required this.skill,
+    required this.increaseExp,
+  });
+
+  final Skill skill;
+  final void Function(String taskId) increaseExp;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 64,
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(skill.title),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.clear),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                Text("Current Exp: ${skill.currentExp}"),
+                const Spacer(),
+                Text("Next Level Exp: ${skill.expToNextLvl}"),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Container(
+              color: Colors.green,
+              width: double.infinity,
+              height: 20,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              child: Column(
+                  children: skill.tasks
+                      .map((task) => TaskItem(
+                            task: task,
+                            increaseExp: increaseExp,
+                          ))
+                      .toList()),
+            ))
+          ],
+        ),
+      ),
+    );
+  }
+}
