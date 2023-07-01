@@ -7,10 +7,12 @@ class SkillDetailView extends StatelessWidget {
     super.key,
     required this.skill,
     required this.increaseExp,
+    required this.setter,
   });
 
   final Skill skill;
   final void Function(String taskId) increaseExp;
+  final void Function(void Function()) setter;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class SkillDetailView extends StatelessWidget {
                       .map((task) => TaskItem(
                             task: task,
                             increaseExp: increaseExp,
+                            setter: setter,
                           ))
                       .toList()),
             ))

@@ -21,9 +21,12 @@ class SkillCard extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
-          builder: (context) => SkillDetailView(
-            skill: skill,
-            increaseExp: increaseExpOnSkill,
+          builder: (context) => StatefulBuilder(
+            builder: (context, setter) => SkillDetailView(
+              skill: skill,
+              setter: setter,
+              increaseExp: increaseExpOnSkill,
+            ),
           ),
         );
       },

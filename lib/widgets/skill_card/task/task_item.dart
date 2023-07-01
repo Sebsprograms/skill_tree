@@ -6,9 +6,11 @@ class TaskItem extends StatelessWidget {
     super.key,
     required this.task,
     required this.increaseExp,
+    required this.setter,
   });
   final Task task;
   final void Function(String taskId) increaseExp;
+  final void Function(void Function()) setter;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class TaskItem extends StatelessWidget {
         Text(task.name),
         ElevatedButton(
           onPressed: () {
-            increaseExp(task.id);
+            setter(() {
+              increaseExp(task.id);
+            });
           },
           child: Text("${task.exp}exp"),
         ),
