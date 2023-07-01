@@ -40,7 +40,7 @@ class SkillTree extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
       ),
-      home: Skills(),
+      home: const Skills(),
     );
   }
 }

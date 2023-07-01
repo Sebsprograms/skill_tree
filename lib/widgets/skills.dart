@@ -57,6 +57,16 @@ class _SkillsState extends State<Skills> {
     });
   }
 
+  void deleteTask(String skillId, String taskId) {
+    setState(() {
+      for (Skill skill in skills) {
+        if (skill.id == skillId) {
+          skill.tasks.removeWhere((task) => task.id == taskId);
+        }
+      }
+    });
+  }
+
   void openNewSkillForm() {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -89,6 +99,7 @@ class _SkillsState extends State<Skills> {
                         skill: skill,
                         increaseExp: increaseExp,
                         deleteSkill: deleteSkill,
+                        deleteTask: deleteTask,
                       ))
                   .toList(),
             ],

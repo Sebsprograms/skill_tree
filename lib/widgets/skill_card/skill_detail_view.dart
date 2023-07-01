@@ -8,12 +8,14 @@ class SkillDetailView extends StatelessWidget {
     required this.skill,
     required this.increaseExp,
     required this.deleteSkill,
+    required this.deleteTask,
     required this.setter,
   });
 
   final Skill skill;
   final void Function(String taskId) increaseExp;
   final void Function(String skillId) deleteSkill;
+  final void Function(String skillId, String taskId) deleteTask;
   final void Function(void Function()) setter;
 
   @override
@@ -79,10 +81,14 @@ class SkillDetailView extends StatelessWidget {
                             task: task,
                             increaseExp: increaseExp,
                             setter: setter,
+                            deleteTask: deleteTask,
+                            skillId: skill.id,
                           ))
                       .toList(),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      //
+                    },
                     icon: const Icon(Icons.add),
                     label: const Text("Add Task"),
                   ),
