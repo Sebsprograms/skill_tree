@@ -14,26 +14,33 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Theme.of(context).appBarTheme.backgroundColor,
-      ),
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(task.name),
-          ElevatedButton(
-            onPressed: () {
-              setter(() {
-                increaseExp(task.id);
-              });
-            },
-            child: Text("${task.exp}exp"),
-          ),
-        ],
+    return Dismissible(
+      // may need different key
+      key: ValueKey(key),
+      onDismissed: (direction) {
+        // implement
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).appBarTheme.backgroundColor,
+        ),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(task.name),
+            ElevatedButton(
+              onPressed: () {
+                setter(() {
+                  increaseExp(task.id);
+                });
+              },
+              child: Text("${task.exp}exp"),
+            ),
+          ],
+        ),
       ),
     );
   }

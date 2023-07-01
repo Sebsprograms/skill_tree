@@ -73,13 +73,21 @@ class SkillDetailView extends StatelessWidget {
             Expanded(
                 child: SingleChildScrollView(
               child: Column(
-                  children: skill.tasks
+                children: [
+                  ...skill.tasks
                       .map((task) => TaskItem(
                             task: task,
                             increaseExp: increaseExp,
                             setter: setter,
                           ))
-                      .toList()),
+                      .toList(),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.add),
+                    label: const Text("Add Task"),
+                  ),
+                ],
+              ),
             ))
           ],
         ),
