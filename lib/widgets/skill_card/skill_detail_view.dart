@@ -7,11 +7,13 @@ class SkillDetailView extends StatelessWidget {
     super.key,
     required this.skill,
     required this.increaseExp,
+    required this.deleteSkill,
     required this.setter,
   });
 
   final Skill skill;
   final void Function(String taskId) increaseExp;
+  final void Function(String skillId) deleteSkill;
   final void Function(void Function()) setter;
 
   @override
@@ -27,7 +29,18 @@ class SkillDetailView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(skill.title),
+                IconButton(
+                  onPressed: () {
+                    deleteSkill(skill.id);
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
+                Text(skill.title,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    )),
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);

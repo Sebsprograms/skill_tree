@@ -51,6 +51,12 @@ class _SkillsState extends State<Skills> {
     });
   }
 
+  void deleteSkill(String skillId) {
+    setState(() {
+      skills.removeWhere((element) => element.id == skillId);
+    });
+  }
+
   void openNewSkillForm() {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -82,6 +88,7 @@ class _SkillsState extends State<Skills> {
                   .map((skill) => SkillCard(
                         skill: skill,
                         increaseExp: increaseExp,
+                        deleteSkill: deleteSkill,
                       ))
                   .toList(),
             ],

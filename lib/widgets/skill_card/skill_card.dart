@@ -3,10 +3,16 @@ import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/widgets/skill_card/skill_detail_view.dart';
 
 class SkillCard extends StatelessWidget {
-  const SkillCard({required this.skill, required this.increaseExp, super.key});
+  const SkillCard({
+    required this.skill,
+    required this.increaseExp,
+    required this.deleteSkill,
+    super.key,
+  });
 
   final Skill skill;
   final void Function(String skillId, String taskId) increaseExp;
+  final void Function(String skillId) deleteSkill;
 
   void increaseExpOnSkill(String taskId) {
     increaseExp(skill.id, taskId);
@@ -26,6 +32,7 @@ class SkillCard extends StatelessWidget {
               skill: skill,
               setter: setter,
               increaseExp: increaseExpOnSkill,
+              deleteSkill: deleteSkill,
             ),
           ),
         );
