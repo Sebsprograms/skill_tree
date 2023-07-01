@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/models/task.dart';
 import 'package:skill_tree/widgets/skill_card/exp_bar.dart';
 import 'package:skill_tree/widgets/skill_card/skill_detail_view.dart';
 
@@ -8,12 +9,14 @@ class SkillCard extends StatelessWidget {
     required this.skill,
     required this.increaseExp,
     required this.deleteSkill,
+    required this.addTask,
     required this.deleteTask,
     super.key,
   });
 
   final Skill skill;
   final void Function(String skillId, String taskId) increaseExp;
+  final void Function(String skillId, Task task) addTask;
   final void Function(String skillId, String taskId) deleteTask;
   final void Function(String skillId) deleteSkill;
 
@@ -36,6 +39,7 @@ class SkillCard extends StatelessWidget {
               setter: setter,
               increaseExp: increaseExpOnSkill,
               deleteSkill: deleteSkill,
+              addTask: addTask,
               deleteTask: deleteTask,
             ),
           ),

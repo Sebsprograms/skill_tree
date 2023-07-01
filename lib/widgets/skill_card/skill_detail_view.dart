@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
+import 'package:skill_tree/models/task.dart';
 import 'package:skill_tree/widgets/skill_card/exp_bar.dart';
+import 'package:skill_tree/widgets/skill_card/task/new_task_dialog.dart';
 import 'package:skill_tree/widgets/skill_card/task/task_item.dart';
 
 class SkillDetailView extends StatelessWidget {
@@ -9,6 +11,7 @@ class SkillDetailView extends StatelessWidget {
     required this.skill,
     required this.increaseExp,
     required this.deleteSkill,
+    required this.addTask,
     required this.deleteTask,
     required this.setter,
   });
@@ -16,6 +19,7 @@ class SkillDetailView extends StatelessWidget {
   final Skill skill;
   final void Function(String taskId) increaseExp;
   final void Function(String skillId) deleteSkill;
+  final void Function(String skillId, Task task) addTask;
   final void Function(String skillId, String taskId) deleteTask;
   final void Function(void Function()) setter;
 
@@ -84,7 +88,15 @@ class SkillDetailView extends StatelessWidget {
                       .toList(),
                   ElevatedButton.icon(
                     onPressed: () {
-                      //
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => Dialog(
+                                child: NewTaskDialog(
+                                  skillId: skill.id,
+                                  setter: setter,
+                                  addTask: addTask,
+                                ),
+                              ));
                     },
                     icon: const Icon(Icons.add),
                     label: const Text("Add Task"),

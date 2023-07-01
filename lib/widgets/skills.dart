@@ -57,6 +57,16 @@ class _SkillsState extends State<Skills> {
     });
   }
 
+  void addTask(String skillId, Task task) {
+    setState(() {
+      for (Skill skill in skills) {
+        if (skill.id == skillId) {
+          skill.tasks.add(task);
+        }
+      }
+    });
+  }
+
   void deleteTask(String skillId, String taskId) {
     setState(() {
       for (Skill skill in skills) {
@@ -99,6 +109,7 @@ class _SkillsState extends State<Skills> {
                         skill: skill,
                         increaseExp: increaseExp,
                         deleteSkill: deleteSkill,
+                        addTask: addTask,
                         deleteTask: deleteTask,
                       ))
                   .toList(),
