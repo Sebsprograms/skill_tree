@@ -59,19 +59,38 @@ class SkillDetailView extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Row(
-              children: [
-                Text("Current Exp: ${skill.currentExp}"),
-                const Spacer(),
-                Text("Next Level Exp: ${skill.expToNextLvl}"),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ExpBar(fill: skill.currentExp / skill.expToNextLvl),
-            const SizedBox(
-              height: 16,
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(children: [
+                Row(
+                  children: [
+                    Text(
+                      "Level: ${skill.level}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                ExpBar(fill: skill.currentExp / skill.expToNextLvl),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  children: [
+                    Text("Current Exp: ${skill.currentExp}"),
+                    const Spacer(),
+                    Text("Next Level Exp: ${skill.expToNextLvl}"),
+                  ],
+                ),
+              ]),
             ),
             Expanded(
                 child: SingleChildScrollView(
