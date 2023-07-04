@@ -38,8 +38,29 @@ class SkillDetailView extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    deleteSkill(skill.id);
-                    Navigator.of(context).pop();
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        content: Text(
+                            "Are you sure you want to delete ${skill.title}?"),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              deleteSkill(skill.id);
+                              Navigator.of(context).pop();
+                              Navigator.pop(ctx);
+                            },
+                            child: const Text("Delete"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.delete),
                 ),
