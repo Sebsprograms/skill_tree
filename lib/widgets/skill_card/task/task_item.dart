@@ -34,26 +34,34 @@ class TaskItem extends StatelessWidget {
       onDismissed: (direction) {
         deleteTask(skillId, task.id);
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).appBarTheme.backgroundColor,
-        ),
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(task.name),
-            ElevatedButton(
-              onPressed: () {
-                setter(() {
-                  increaseExp(task.id);
-                });
-              },
-              child: Text("${task.exp}exp"),
-            ),
-          ],
+      child: GestureDetector(
+        onLongPress: () {
+          setter(() {
+            increaseExp(task.id);
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).appBarTheme.backgroundColor,
+          ),
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(task.name,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
+              Text('${task.exp} exp',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ],
+          ),
         ),
       ),
     );

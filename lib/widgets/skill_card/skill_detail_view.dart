@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/models/task.dart';
-import 'package:skill_tree/widgets/skill_card/exp_bar.dart';
+import 'package:skill_tree/widgets/skill_card/skill_detail_title.dart';
+import 'package:skill_tree/widgets/skill_card/skill_specs.dart';
 import 'package:skill_tree/widgets/skill_card/task/new_task_dialog.dart';
 import 'package:skill_tree/widgets/skill_card/task/task_item.dart';
 
@@ -33,85 +34,18 @@ class SkillDetailView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        content: Text(
-                            "Are you sure you want to delete ${skill.title}?"),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () {
-                              deleteSkill(skill.id);
-                              Navigator.of(context).pop();
-                              Navigator.pop(ctx);
-                            },
-                            child: const Text("Delete"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(ctx);
-                            },
-                            child: const Text("Cancel"),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.delete),
-                ),
-                Text(skill.title,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    )),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.clear),
-                ),
-              ],
+            SkillDetailTitle(
+              skill: skill,
+              deleteSkill: deleteSkill,
             ),
             const SizedBox(
               height: 16,
             ),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.inversePrimary,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(children: [
-                Row(
-                  children: [
-                    Text(
-                      "Level: ${skill.level}",
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                ExpBar(fill: skill.currentExp / skill.expToNextLvl),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Text("Current Exp: ${skill.currentExp}"),
-                    const Spacer(),
-                    Text("Next Level Exp: ${skill.expToNextLvl}"),
-                  ],
-                ),
-              ]),
+            SkillSpecs(
+              skill: skill,
+            ),
+            const SizedBox(
+              height: 8,
             ),
             Expanded(
                 child: SingleChildScrollView(
