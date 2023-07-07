@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/models/task.dart';
-import 'package:skill_tree/widgets/skill_card/skill_detail_title.dart';
 import 'package:skill_tree/widgets/skill_card/skill_specs.dart';
 import 'package:skill_tree/widgets/skill_card/task/new_task_dialog.dart';
 import 'package:skill_tree/widgets/skill_card/task/task_item.dart';
@@ -28,21 +27,11 @@ class SkillDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 64,
-        ),
         child: Column(
           children: [
-            SkillDetailTitle(
-              skill: skill,
-              deleteSkill: deleteSkill,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
             SkillSpecs(
               skill: skill,
+              deleteSkill: deleteSkill,
             ),
             const SizedBox(
               height: 8,

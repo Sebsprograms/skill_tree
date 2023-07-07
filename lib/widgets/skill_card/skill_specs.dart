@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/models/skill.dart';
 import 'package:skill_tree/widgets/skill_card/exp_bar.dart';
+import 'package:skill_tree/widgets/skill_card/skill_detail_title.dart';
 
 class SkillSpecs extends StatelessWidget {
   const SkillSpecs({
     super.key,
     required this.skill,
+    required this.deleteSkill,
   });
   final Skill skill;
+  final void Function(String skillId) deleteSkill;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(
+        bottom: 16,
+        top: 64,
+        left: 16,
+        right: 16,
+      ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.inversePrimary,
-        borderRadius: BorderRadius.circular(8),
+        color: Theme.of(context).appBarTheme.backgroundColor,
       ),
       child: Column(children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          width: double.infinity,
-          child: Center(
-            child: Text(
-              "Level: ${skill.level}",
-              style: const TextStyle(
-                fontSize: 18,
+        SkillDetailTitle(skill: skill, deleteSkill: deleteSkill),
+        Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                "Level: ${skill.level}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
+          ],
         ),
         const SizedBox(
           height: 8,
@@ -44,7 +51,7 @@ class SkillSpecs extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(
@@ -61,7 +68,7 @@ class SkillSpecs extends StatelessWidget {
             const Spacer(),
             Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(
