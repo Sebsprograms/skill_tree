@@ -36,37 +36,40 @@ class SkillDetailView extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Expanded(
-                child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ...skill.tasks
-                      .map((task) => TaskItem(
-                            task: task,
-                            increaseExp: increaseExp,
-                            setter: setter,
-                            deleteTask: deleteTask,
-                            skillId: skill.id,
-                          ))
-                      .toList(),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => Dialog(
-                                child: NewTaskDialog(
-                                  skillId: skill.id,
-                                  setter: setter,
-                                  addTask: addTask,
-                                ),
-                              ));
-                    },
-                    icon: const Icon(Icons.add),
-                    label: const Text("Add Task"),
-                  ),
-                ],
-              ),
-            ))
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Expanded(
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ...skill.tasks
+                        .map((task) => TaskItem(
+                              task: task,
+                              increaseExp: increaseExp,
+                              setter: setter,
+                              deleteTask: deleteTask,
+                              skillId: skill.id,
+                            ))
+                        .toList(),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => Dialog(
+                                  child: NewTaskDialog(
+                                    skillId: skill.id,
+                                    setter: setter,
+                                    addTask: addTask,
+                                  ),
+                                ));
+                      },
+                      icon: const Icon(Icons.add),
+                      label: const Text("Add Task"),
+                    ),
+                  ],
+                ),
+              )),
+            )
           ],
         ),
       ),

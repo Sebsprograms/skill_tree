@@ -28,13 +28,20 @@ class SkillSpecs extends StatelessWidget {
         SkillDetailTitle(skill: skill, deleteSkill: deleteSkill),
         Row(
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 2,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Text(
                 "Level: ${skill.level}",
                 textAlign: TextAlign.start,
                 style: const TextStyle(
-                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

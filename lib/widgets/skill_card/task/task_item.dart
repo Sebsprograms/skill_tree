@@ -32,6 +32,20 @@ class TaskItem extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            'Deleted: ${task.name}',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              // Code to execute.
+            },
+          ),
+        ));
         deleteTask(skillId, task.id);
       },
       child: GestureDetector(

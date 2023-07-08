@@ -10,6 +10,45 @@ class SkillDetailTitle extends StatelessWidget {
   final Skill skill;
   final void Function(String skillId) deleteSkill;
 
+  void delete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        content: Text("Are you sure you want to delete ${skill.title}?"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                  'Deleted: ${skill.title}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    // Code to execute.
+                  },
+                ),
+              ));
+              deleteSkill(skill.id);
+              Navigator.of(context).pop();
+              Navigator.pop(ctx);
+            },
+            child: const Text("Delete"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+            },
+            child: const Text("Cancel"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,29 +56,7 @@ class SkillDetailTitle extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                content:
-                    Text("Are you sure you want to delete ${skill.title}?"),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      deleteSkill(skill.id);
-                      Navigator.of(context).pop();
-                      Navigator.pop(ctx);
-                    },
-                    child: const Text("Delete"),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                    },
-                    child: const Text("Cancel"),
-                  ),
-                ],
-              ),
-            );
+            delete(context);
           },
           icon: const Icon(Icons.delete),
         ),
