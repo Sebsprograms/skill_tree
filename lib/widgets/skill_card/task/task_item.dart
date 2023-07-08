@@ -7,14 +7,36 @@ class TaskItem extends StatelessWidget {
     required this.task,
     required this.increaseExp,
     required this.setter,
+    required this.addTask,
     required this.deleteTask,
     required this.skillId,
   });
   final Task task;
   final void Function(String taskId) increaseExp;
   final void Function(void Function()) setter;
+  final void Function(String skillId, Task task) addTask;
   final void Function(String skillId, String taskId) deleteTask;
   final String skillId;
+
+  void dismiss(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        'Deleted: ${task.name}',
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          setter(() {
+            addTask(skillId, task);
+          });
+        },
+      ),
+    ));
+    deleteTask(skillId, task.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +54,7 @@ class TaskItem extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            'Deleted: ${task.name}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              // Code to execute.
-            },
-          ),
-        ));
-        deleteTask(skillId, task.id);
+        dismiss(context);
       },
       child: GestureDetector(
         onLongPress: () {
