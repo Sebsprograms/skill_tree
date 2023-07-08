@@ -49,6 +49,7 @@ class SkillDetailView extends StatelessWidget {
                               task: task,
                               increaseExp: increaseExp,
                               setter: setter,
+                              addTask: addTask,
                               deleteTask: deleteTask,
                               skillId: skill.id,
                             ))
