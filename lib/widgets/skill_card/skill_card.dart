@@ -10,6 +10,7 @@ class SkillCard extends StatelessWidget {
     required this.increaseExp,
     required this.deleteSkill,
     required this.addTask,
+    required this.addSkill,
     required this.deleteTask,
     super.key,
   });
@@ -17,6 +18,7 @@ class SkillCard extends StatelessWidget {
   final Skill skill;
   final void Function(String skillId, String taskId) increaseExp;
   final void Function(String skillId, Task task) addTask;
+  final void Function(Skill skill) addSkill;
   final void Function(String skillId, String taskId) deleteTask;
   final void Function(String skillId) deleteSkill;
 
@@ -38,6 +40,7 @@ class SkillCard extends StatelessWidget {
               skill: skill,
               setter: setter,
               increaseExp: increaseExpOnSkill,
+              addSkill: addSkill,
               deleteSkill: deleteSkill,
               addTask: addTask,
               deleteTask: deleteTask,

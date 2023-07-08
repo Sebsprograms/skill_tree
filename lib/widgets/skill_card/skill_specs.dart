@@ -8,9 +8,11 @@ class SkillSpecs extends StatelessWidget {
     super.key,
     required this.skill,
     required this.deleteSkill,
+    required this.addSkill,
   });
   final Skill skill;
   final void Function(String skillId) deleteSkill;
+  final void Function(Skill skill) addSkill;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,11 @@ class SkillSpecs extends StatelessWidget {
         color: Theme.of(context).appBarTheme.backgroundColor,
       ),
       child: Column(children: [
-        SkillDetailTitle(skill: skill, deleteSkill: deleteSkill),
+        SkillDetailTitle(
+          skill: skill,
+          deleteSkill: deleteSkill,
+          addSkill: addSkill,
+        ),
         Row(
           children: [
             Container(

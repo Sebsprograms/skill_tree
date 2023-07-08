@@ -12,12 +12,14 @@ class SkillDetailView extends StatelessWidget {
     required this.increaseExp,
     required this.deleteSkill,
     required this.addTask,
+    required this.addSkill,
     required this.deleteTask,
     required this.setter,
   });
 
   final Skill skill;
   final void Function(String taskId) increaseExp;
+  final void Function(Skill skill) addSkill;
   final void Function(String skillId) deleteSkill;
   final void Function(String skillId, Task task) addTask;
   final void Function(String skillId, String taskId) deleteTask;
@@ -26,20 +28,20 @@ class SkillDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            SkillSpecs(
-              skill: skill,
-              deleteSkill: deleteSkill,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Expanded(
-                  child: SingleChildScrollView(
+      body: Column(
+        children: [
+          SkillSpecs(
+            skill: skill,
+            addSkill: addSkill,
+            deleteSkill: deleteSkill,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
                     ...skill.tasks
@@ -68,10 +70,10 @@ class SkillDetailView extends StatelessWidget {
                     ),
                   ],
                 ),
-              )),
-            )
-          ],
-        ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

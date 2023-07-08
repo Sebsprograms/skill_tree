@@ -108,6 +108,7 @@ class _SkillsState extends State<Skills> {
                   .map((skill) => SkillCard(
                         skill: skill,
                         increaseExp: increaseExp,
+                        addSkill: addSkill,
                         deleteSkill: deleteSkill,
                         addTask: addTask,
                         deleteTask: deleteTask,

@@ -6,9 +6,11 @@ class SkillDetailTitle extends StatelessWidget {
     super.key,
     required this.skill,
     required this.deleteSkill,
+    required this.addSkill,
   });
   final Skill skill;
   final void Function(String skillId) deleteSkill;
+  final void Function(Skill skill) addSkill;
 
   void delete(BuildContext context) {
     showDialog(
@@ -28,7 +30,7 @@ class SkillDetailTitle extends StatelessWidget {
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {
-                    // Code to execute.
+                    addSkill(skill);
                   },
                 ),
               ));
