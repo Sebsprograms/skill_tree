@@ -40,13 +40,14 @@ class SkillSpecs extends StatelessWidget {
                 vertical: 2,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
                 "Level: ${skill.level}",
                 textAlign: TextAlign.start,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -64,7 +65,7 @@ class SkillSpecs extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(
@@ -73,7 +74,8 @@ class SkillSpecs extends StatelessWidget {
               ),
               child: Text(
                 '${skill.currentExp}',
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -81,7 +83,7 @@ class SkillSpecs extends StatelessWidget {
             const Spacer(),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(
@@ -90,7 +92,8 @@ class SkillSpecs extends StatelessWidget {
               ),
               child: Text(
                 '${skill.expToNextLvl}',
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
                   fontWeight: FontWeight.bold,
                 ),
               ),

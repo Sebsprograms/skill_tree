@@ -28,6 +28,7 @@ class SkillDetailTitle extends StatelessWidget {
                   ),
                 ),
                 action: SnackBarAction(
+                  textColor: Theme.of(context).colorScheme.secondaryContainer,
                   label: 'Undo',
                   onPressed: () {
                     addSkill(skill);

@@ -99,7 +99,8 @@ class _SkillsState extends State<Skills> {
           ),
         ],
       ),
-      body: SizedBox(
+      body: Container(
+        padding: const EdgeInsets.only(top: 8),
         height: double.infinity,
         child: SingleChildScrollView(
           child: Column(
