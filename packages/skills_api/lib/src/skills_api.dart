@@ -20,6 +20,9 @@ abstract class SkillsApi {
   /// Decrement xp of a skill and returns true if a level was reverted
   Future<bool> decrementExp(String id, int xp);
 
+  /// Get a colorCode from a skill by Id
+  Future<String> getColorCode(String id);
+
   /// Closes the connection to the API.
   Future<void> close();
 }
