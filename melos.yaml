@@ -1,0 +1,11 @@
+name: skill_tree
+
+packages:
+  - packages/*
+  - apps/*
+    
+scripts:
+  analyze:
+    exec: dart analyze .
+  skill_tree:
+    run: cd apps/skill_tree && flutter run -t lib/main_development.dart -d chrome
