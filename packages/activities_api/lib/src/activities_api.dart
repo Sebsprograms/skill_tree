@@ -1,4 +1,4 @@
-import 'package:activities_api/models/activity.dart';
+import 'package:activities_api/src/models/activity.dart';
 
 /// The interface for an API providing access to Activities
 abstract class ActivitiesApi {

@@ -1,4 +1,4 @@
-import 'package:activities_api/models/models.dart';
+import 'package:activities_api/src/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
