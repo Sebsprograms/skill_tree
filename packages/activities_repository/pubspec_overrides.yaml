@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: activities_api
+dependency_overrides:
+  activities_api:
+    path: ../activities_api

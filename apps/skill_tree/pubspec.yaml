@@ -15,6 +15,27 @@ dependencies:
     sdk: flutter
   intl: ^0.19.0
 
+  local_storage_skills_api:
+    path: ../packages/local_storage_skills_api
+  skills_api:
+    path: ../packages/skills_api
+  activities_api:
+    path: ../packages/activities_api
+  local_storage_activities_api:
+    path: ../packages/local_storage_activities_api
+  activities_repository:
+    path: ../packages/activities_repository
+  skills_repository:
+    path: ../packages/skills_repository
+  local_storage_tasks_api:
+    path: ../packages/local_storage_tasks_api
+  tasks_api:
+    path: ../packages/tasks_api
+  tasks_repository:
+    path: ../packages/tasks_repository
+  shared_preferences: ^2.3.2
+  equatable: ^2.0.5
+
 dev_dependencies:
   bloc_test: ^9.1.7
   flutter_test:
@@ -27,12 +48,3 @@ flutter:
   generate: true
 
 
-local_storage_activities_api: ^0.1.0+1
-activities_api: ^0.1.0+1
-activities_repository: ^0.1.0+1
-local_storage_skills_api: ^0.1.0+1
-skills_api: ^0.1.0+1
-skills_repository: ^0.1.0+1
-local_storage_tasks_api: ^0.1.0+1
-tasks_api: ^0.1.0+1
-tasks_repository: ^0.1.0+1

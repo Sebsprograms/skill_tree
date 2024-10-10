@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: skills_api
+dependency_overrides:
+  skills_api:
+    path: ../skills_api
