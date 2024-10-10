@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:skill_tree/app/view/app.dart';
+import 'package:skills_api/skills_api.dart';
+import 'package:skills_repository/skills_repository.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -20,14 +24,23 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+void bootstrap({required SkillsApi skillsApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
+  PlatformDispatcher.instance.onError = (error, stack) {
+    log(error.toString(), stackTrace: stack);
+    return true;
+  };
+
   Bloc.observer = const AppBlocObserver();
 
-  // Add cross-flavor configuration here
+  final skillsRepository = SkillsRepository(skillsApi: skillsApi);
 
-  runApp(await builder());
+  runApp(
+    App(
+      skillsRepository: skillsRepository,
+    ),
+  );
 }

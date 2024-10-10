@@ -1,0 +1,20 @@
+# melos_managed_dependency_overrides: activities_api,activities_repository,local_storage_activities_api,local_storage_skills_api,local_storage_tasks_api,skills_api,skills_repository,tasks_api,tasks_repository
+dependency_overrides:
+  activities_api:
+    path: ../../packages/activities_api
+  activities_repository:
+    path: ../../packages/activities_repository
+  local_storage_activities_api:
+    path: ../../packages/local_storage_activities_api
+  local_storage_skills_api:
+    path: ../../packages/local_storage_skills_api
+  local_storage_tasks_api:
+    path: ../../packages/local_storage_tasks_api
+  skills_api:
+    path: ../../packages/skills_api
+  skills_repository:
+    path: ../../packages/skills_repository
+  tasks_api:
+    path: ../../packages/tasks_api
+  tasks_repository:
+    path: ../../packages/tasks_repository
