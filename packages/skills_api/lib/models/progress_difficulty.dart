@@ -3,28 +3,31 @@
 /// Each difficulty level has a corresponding label and a hex color code.
 enum ProgressDifficulty {
   /// Represents a very easy difficulty level with a green color.
-  veryEasy('Very Easy', '#00FF00'), // Green
+  veryEasy('Very Easy', '#00FF00', 25), // Green
 
   /// Represents an easy difficulty level with a light green color.
-  easy('Easy', '#90EE90'), // Light Green
+  easy('Easy', '#90EE90', 50), // Light Green
 
   /// Represents a medium difficulty level with an orange color.
-  medium('Medium', '#FFA500'), // Orange
+  medium('Medium', '#FFA500', 75), // Orange
 
   /// Represents a hard difficulty level with a red color.
-  hard('Hard', '#FF0000'), // Red
+  hard('Hard', '#FF0000', 100), // Red
 
   /// Represents a very hard difficulty level with a dark red color.
-  veryHard('Very Hard', '#8B0000'); // Dark Red
+  veryHard('Very Hard', '#8B0000', 150); // Dark Red
 
   /// Constructs a [ProgressDifficulty] with the given [label] and [colorCode].
-  const ProgressDifficulty(this.label, this.colorCode);
+  const ProgressDifficulty(this.label, this.colorCode, this.expIncrease);
 
   /// The human-readable label for the difficulty level.
   final String label;
 
   /// The hex color code representing the difficulty level.
   final String colorCode;
+
+  /// The amount the required EXP for a skill should increase upon level up
+  final int expIncrease;
 
   /// Returns the string representation of the difficulty level.
   ///

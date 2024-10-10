@@ -68,6 +68,30 @@ class Skill extends Equatable {
   /// Defaults to 100 for new skills.
   final int requiredExpToNextLevel;
 
+  /// Creates a copy of the instance with changes passed in as args
+  Skill copyWith({
+    String? id,
+    String? title,
+    String? description,
+    ProgressDifficulty? progressDifficulty,
+    String? colorCode,
+    int? currentLevel,
+    int? currentExp,
+    int? requiredExpToNextLevel,
+  }) {
+    return Skill(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      progressDifficulty: progressDifficulty ?? this.progressDifficulty,
+      colorCode: colorCode ?? this.colorCode,
+      currentLevel: currentLevel ?? this.currentLevel,
+      currentExp: currentExp ?? this.currentExp,
+      requiredExpToNextLevel:
+          requiredExpToNextLevel ?? this.requiredExpToNextLevel,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,

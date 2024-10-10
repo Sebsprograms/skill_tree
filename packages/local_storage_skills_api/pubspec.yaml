@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  meta: ^1.15.0
+  rxdart: ^0.28.0
+  shared_preferences: ^2.3.2
+  skills_api:
+    path: ../skills_api
 
 dev_dependencies:
   flutter_test:
