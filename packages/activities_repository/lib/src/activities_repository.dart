@@ -1,7 +1,8 @@
-// A repository for interacting with the activities API
 import 'package:activities_api/activities_api.dart';
 
+/// A repository for interacting with the activities API
 class ActivitiesRepository {
+  /// Creates an instance of [ActivitiesRepository]
   const ActivitiesRepository({
     required ActivitiesApi activitiesApi,
   }) : _activitiesApi = activitiesApi;
