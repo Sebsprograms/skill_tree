@@ -41,6 +41,17 @@ class Activity extends Equatable {
   /// A timestamp when the activity was last performed.
   final DateTime? lastUsed;
 
+  /// Check whether the activity is still on cooldown.
+  bool get isOnCooldown {
+    if (lastUsed == null) return false;
+
+    // Calculate the time difference from now.
+    final timeSinceLastUsed = DateTime.now().difference(lastUsed!);
+
+    // Return true if the cooldown period hasn't expired yet.
+    return timeSinceLastUsed < cooldown;
+  }
+
   @override
   List<Object?> get props => [];
 
