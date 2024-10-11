@@ -13,6 +13,8 @@ dependencies:
   widgetbook_annotation: ^3.2.0
   skill_tree:
     path: ../apps/skill_tree
+  skills_api:
+    path: ../packages/skills_api
 
 dev_dependencies:
   flutter_test:

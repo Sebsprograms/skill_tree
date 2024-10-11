@@ -669,7 +669,7 @@ packages:
     source: path
     version: "1.0.0+1"
   skills_api:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../packages/skills_api"
       relative: true

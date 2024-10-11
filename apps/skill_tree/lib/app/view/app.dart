@@ -28,6 +28,7 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: FlutterSkillTreeTheme.light,
       darkTheme: FlutterSkillTreeTheme.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
