@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_tree/home/cubit/home_cubit.dart';
+import 'package:skill_tree/home/widgets/tab_button.dart';
+import 'package:skill_tree/l10n/l10n.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,22 +27,22 @@ class HomeView extends StatelessWidget {
         index: currentTab.index,
         children: [
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.tasksAppBarTitle),
           ),
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.activitiesAppBarTitle),
           ),
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.settingsAppBarTitle),
           ),
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.statisticsAppBarTitle),
           ),
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.logsAppBarTitle),
           ),
           Center(
-            child: Text('${currentTab.index} $currentTab'),
+            child: Text(context.l10n.settingsAppBarTitle),
           ),
         ],
       ),
@@ -49,62 +50,39 @@ class HomeView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _HomeTabButton(
+            TabButton(
+              groupValue: currentTab,
+              value: HomeTab.tasks,
+              icon: const Icon(Icons.abc),
+            ),
+            TabButton(
               groupValue: currentTab,
               value: HomeTab.activities,
               icon: const Icon(Icons.abc),
             ),
-            _HomeTabButton(
-              groupValue: currentTab,
-              value: HomeTab.logs,
-              icon: const Icon(Icons.abc),
-            ),
-            _HomeTabButton(
-              groupValue: currentTab,
-              value: HomeTab.settings,
-              icon: const Icon(Icons.abc),
-            ),
-            _HomeTabButton(
+            TabButton(
               groupValue: currentTab,
               value: HomeTab.skills,
               icon: const Icon(Icons.abc),
             ),
-            _HomeTabButton(
+            TabButton(
               groupValue: currentTab,
               value: HomeTab.stats,
               icon: const Icon(Icons.abc),
             ),
-            _HomeTabButton(
+            TabButton(
               groupValue: currentTab,
-              value: HomeTab.tasks,
+              value: HomeTab.logs,
+              icon: const Icon(Icons.abc),
+            ),
+            TabButton(
+              groupValue: currentTab,
+              value: HomeTab.settings,
               icon: const Icon(Icons.abc),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _HomeTabButton extends StatelessWidget {
-  const _HomeTabButton({
-    required this.groupValue,
-    required this.value,
-    required this.icon,
-  });
-
-  final HomeTab groupValue;
-  final HomeTab value;
-  final Widget icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => context.read<HomeCubit>().setTab(value),
-      color:
-          groupValue == value ? Theme.of(context).colorScheme.secondary : null,
-      iconSize: 32,
-      icon: icon,
     );
   }
 }

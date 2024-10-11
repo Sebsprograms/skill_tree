@@ -1,7 +1,31 @@
 {
     "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
+    "appTitle": "Árbol de Habilidades",
+    "@appTitle": {
+        "description": "El título de la aplicación"
+    },
+    "activitiesAppBarTitle": "Actividades",
+    "@activitiesAppBarTitle": {
+        "description": "Título de la AppBar para la página de Actividades"
+    },
+    "skillsAppBarTitle": "Habilidades",
+    "@skillsAppBarTitle": {
+        "description": "Título de la AppBar para la página de Habilidades"
+    },
+    "tasksAppBarTitle": "Tareas",
+    "@tasksAppBarTitle": {
+        "description": "Título de la AppBar para la página de Tareas"
+    },
+    "statisticsAppBarTitle": "Estadísticas",
+    "@statisticsAppBarTitle": {
+        "description": "Título de la AppBar para la página de Estadísticas"
+    },
+    "settingsAppBarTitle": "Configuraciones",
+    "@settingsAppBarTitle": {
+        "description": "Título de la AppBar para la página de Configuraciones"
+    },
+    "logsAppBarTitle": "Registros",
+    "@logsAppBarTitle": {
+        "description": "Título de la AppBar para la página de Registros"
     }
 }
