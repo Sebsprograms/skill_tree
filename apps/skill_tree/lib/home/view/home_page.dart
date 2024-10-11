@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_tree/home/cubit/home_cubit.dart';
 import 'package:skill_tree/home/widgets/tab_button.dart';
 import 'package:skill_tree/l10n/l10n.dart';
+import 'package:skill_tree/skills/view/view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,9 +33,7 @@ class HomeView extends StatelessWidget {
           Center(
             child: Text(context.l10n.activitiesAppBarTitle),
           ),
-          Center(
-            child: Text(context.l10n.settingsAppBarTitle),
-          ),
+          const SkillsPage(),
           Center(
             child: Text(context.l10n.statisticsAppBarTitle),
           ),
@@ -53,32 +52,32 @@ class HomeView extends StatelessWidget {
             TabButton(
               groupValue: currentTab,
               value: HomeTab.tasks,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.checklist_rounded),
             ),
             TabButton(
               groupValue: currentTab,
               value: HomeTab.activities,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.stream_rounded),
             ),
             TabButton(
               groupValue: currentTab,
               value: HomeTab.skills,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.star_rounded),
             ),
             TabButton(
               groupValue: currentTab,
               value: HomeTab.stats,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.bar_chart_rounded),
             ),
             TabButton(
               groupValue: currentTab,
               value: HomeTab.logs,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.history_rounded),
             ),
             TabButton(
               groupValue: currentTab,
               value: HomeTab.settings,
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.settings_rounded),
             ),
           ],
         ),
