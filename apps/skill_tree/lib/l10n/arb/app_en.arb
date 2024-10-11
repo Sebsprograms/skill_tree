@@ -1,7 +1,31 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "appTitle": "Skill Tree",
+    "@appTitle": {
+        "description": "The title of the app"
+    },
+    "activitiesAppBarTitle": "Activities",
+    "@activitiesAppBarTitle": {
+        "description": "AppBar title for the Activities page"
+    },
+    "skillsAppBarTitle": "Skills",
+    "@skillsAppBarTitle": {
+        "description": "AppBar title for the Skills page"
+    },
+    "tasksAppBarTitle": "Tasks",
+    "@tasksAppBarTitle": {
+        "description": "AppBar title for the Tasks page"
+    },
+    "statisticsAppBarTitle": "Statistics",
+    "@statisticsAppBarTitle": {
+        "description": "AppBar title for the Statistics page"
+    },
+    "settingsAppBarTitle": "Settings",
+    "@settingsAppBarTitle": {
+        "description": "AppBar title for the Settings page"
+    },
+    "logsAppBarTitle": "Logs",
+    "@logsAppBarTitle": {
+        "description": "AppBar title for the Logs page"
     }
 }

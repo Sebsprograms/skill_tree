@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FlutterTodosTheme {
+class FlutterSkillTreeTheme {
   static ThemeData get light {
     return ThemeData(
       appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 117, 208, 247)),
