@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:skill_tree/utils/color_helpers.dart';
+import 'package:skills_api/models/models.dart';
 import 'package:skills_api/models/skill.dart';
 import 'package:skills_repository/skills_repository.dart';
 
@@ -18,11 +21,13 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
           color: Colors.blue,
           title: '',
           description: '',
+          progressDifficulty: ProgressDifficulty.medium,
           isValid: false,
         )) {
     on<TitleChanged>(_titleChanged);
     on<DescriptionChanged>(_descriptionChanged);
     on<ColorChanged>(_colorChanged);
+    on<ProgressDifficultyChanged>(_progressDifficultyChanged);
     on<FormSubmitted>(_formSubmitted);
   }
 
@@ -61,6 +66,20 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
     emit(
       state.copyWith(
         color: event.color,
+        isValid: _validateForm(
+          state.title,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _progressDifficultyChanged(
+    ProgressDifficultyChanged event,
+    Emitter<CreateSkillState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        progressDifficulty: event.difficulty,
         isValid: _validateForm(
           state.title,
         ),

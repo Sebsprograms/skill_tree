@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:skill_tree/create_skill/bloc/create_skill_bloc.dart';
+import 'package:skill_tree/create_skill/widgets/widgets.dart';
 import 'package:skills_repository/skills_repository.dart';
 
 class CreateSkillPage extends StatelessWidget {
@@ -28,67 +28,25 @@ class CreateSkillView extends StatelessWidget {
       child: Form(
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    BlocBuilder<CreateSkillBloc, CreateSkillState>(
-                      builder: (context, state) {
-                        return TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Title',
-                            errorText:
-                                (state.title.isEmpty || state.title.length < 3)
-                                    ? 'Title must be over 3 characters'
-                                    : null,
-                          ),
-                          style: const TextStyle(
-                            fontSize: 24,
-                          ),
-                          onChanged: (value) {
-                            context
-                                .read<CreateSkillBloc>()
-                                .add(TitleChanged(value));
-                          },
-                          maxLength: 20,
-                        );
-                      },
-                    ),
-                    BlocBuilder<CreateSkillBloc, CreateSkillState>(
-                      builder: (context, state) {
-                        return TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Description',
-                          ),
-                          onChanged: (value) {
-                            context
-                                .read<CreateSkillBloc>()
-                                .add(DescriptionChanged(value));
-                          },
-                          maxLines: 4,
-                          maxLength: 200,
-                        );
-                      },
-                    ),
-                    const SizedBox(
+                    SkillTitleInput(),
+                    SkillDescriptionInput(),
+                    SizedBox(
                       width: 4,
                     ),
-                    const Text('Skill color'),
-                    const SizedBox(
+                    Text('Difficulty'),
+                    SkillDifficultySlider(),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text('Skill color'),
+                    SizedBox(
                       width: 2,
                     ),
-                    BlocBuilder<CreateSkillBloc, CreateSkillState>(
-                      builder: (context, state) {
-                        return ColorPicker(
-                          pickerColor: state.color,
-                          onColorChanged: (color) {
-                            context
-                                .read<CreateSkillBloc>()
-                                .add(ColorChanged(color));
-                          },
-                        );
-                      },
-                    ),
+                    SkillColorPicker(),
                   ],
                 ),
               ),

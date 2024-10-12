@@ -13,6 +13,11 @@ class DescriptionChanged extends CreateSkillEvent {
   final String description;
 }
 
+class ProgressDifficultyChanged extends CreateSkillEvent {
+  ProgressDifficultyChanged(this.difficulty);
+  final ProgressDifficulty difficulty;
+}
+
 class ColorChanged extends CreateSkillEvent {
   ColorChanged(this.color);
   final Color color;
