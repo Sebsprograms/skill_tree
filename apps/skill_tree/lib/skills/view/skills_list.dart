@@ -22,9 +22,14 @@ class SkillsList extends StatelessWidget {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (BuildContext context) => const Dialog(
-              child: CreateSkillPage(),
-            ),
+            builder: (BuildContext context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const CreateSkillPage(),
+              );
+            },
           );
         },
         shape: const CircleBorder(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:skill_tree/create_skill/bloc/create_skill_bloc.dart';
+import 'package:skills_repository/skills_repository.dart';
 
 class CreateSkillPage extends StatelessWidget {
   const CreateSkillPage({super.key});
@@ -9,7 +10,9 @@ class CreateSkillPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CreateSkillBloc(),
+      create: (_) => CreateSkillBloc(
+        skillsRepository: context.read<SkillsRepository>(),
+      ),
       child: const CreateSkillView(),
     );
   }
@@ -105,14 +108,12 @@ class CreateSkillView extends StatelessWidget {
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: state.isValid
-                            ? () {
-                                final currentState =
-                                    context.read<CreateSkillBloc>().state;
-                                print('Title: ${currentState.title}');
-                                print(
-                                    'Description: ${currentState.description}');
-                                print('Color: ${currentState.color}');
-                                // Navigator.of(context).pop();
+                            ? () async {
+                                context
+                                    .read<CreateSkillBloc>()
+                                    .add(FormSubmitted());
+
+                                Navigator.pop(context);
                               }
                             : null,
                         child: const Text('Submit'),

@@ -17,3 +17,7 @@ Color getContrastingTextColor(Color backgroundColor) {
   final luminance = backgroundColor.computeLuminance();
   return luminance > 0.5 ? Colors.black : Colors.white;
 }
+
+String colorToHex(Color color) {
+  return '#${(color.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+}

@@ -17,3 +17,5 @@ class ColorChanged extends CreateSkillEvent {
   ColorChanged(this.color);
   final Color color;
 }
+
+final class FormSubmitted extends CreateSkillEvent {}

@@ -3,13 +3,18 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:skill_tree/utils/color_helpers.dart';
+import 'package:skills_api/models/skill.dart';
+import 'package:skills_repository/skills_repository.dart';
 
 part 'create_skill_event.dart';
 part 'create_skill_state.dart';
 
 class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
-  CreateSkillBloc()
-      : super(CreateSkillState(
+  CreateSkillBloc({
+    required SkillsRepository skillsRepository,
+  })  : _skillsRepository = skillsRepository,
+        super(CreateSkillState(
           color: Colors.blue,
           title: '',
           description: '',
@@ -18,7 +23,10 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
     on<TitleChanged>(_titleChanged);
     on<DescriptionChanged>(_descriptionChanged);
     on<ColorChanged>(_colorChanged);
+    on<FormSubmitted>(_formSubmitted);
   }
+
+  final SkillsRepository _skillsRepository;
 
   FutureOr<void> _titleChanged(
     TitleChanged event,
@@ -64,5 +72,20 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
     String title,
   ) {
     return title.isNotEmpty && title.length >= 3;
+  }
+
+  FutureOr<void> _formSubmitted(
+    FormSubmitted event,
+    Emitter<CreateSkillState> emit,
+  ) async {
+    final newSkill = Skill(
+      colorCode: colorToHex(state.color),
+      title: state.title,
+      description: state.description,
+    );
+
+    try {
+      await _skillsRepository.saveSkill(newSkill);
+    } catch (e) {}
   }
 }
