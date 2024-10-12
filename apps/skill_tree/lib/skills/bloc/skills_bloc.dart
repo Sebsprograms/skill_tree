@@ -14,6 +14,7 @@ class SkillsBloc extends Bloc<SkillsEvent, SkillsState> {
   })  : _skillsRepository = skillsRepository,
         super(const SkillsState()) {
     on<SkillsSubscriptionRequested>(_skillsSubscriptionRequested);
+    on<SkillsSubmittedNewSkill>(_skillsSubmittedNewSkill);
   }
 
   final SkillsRepository _skillsRepository;
@@ -36,5 +37,26 @@ class SkillsBloc extends Bloc<SkillsEvent, SkillsState> {
         status: SkillsStatus.error,
       ),
     );
+  }
+
+  FutureOr<void> _skillsSubmittedNewSkill(
+    SkillsSubmittedNewSkill event,
+    Emitter<SkillsState> emit,
+  ) async {
+    emit(state.copyWith(status: SkillsStatus.loading));
+
+    final newSkill = Skill(
+      colorCode: event.colorHex,
+      title: event.title,
+      description: event.description ?? '',
+      progressDifficulty: event.difficulty,
+    );
+
+    try {
+      await _skillsRepository.saveSkill(newSkill);
+      emit(state.copyWith(status: SkillsStatus.loaded));
+    } catch (e) {
+      emit(state.copyWith(status: SkillsStatus.error));
+    }
   }
 }
