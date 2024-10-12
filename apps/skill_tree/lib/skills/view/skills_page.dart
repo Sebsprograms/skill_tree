@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skill_tree/l10n/l10n.dart';
 import 'package:skill_tree/skills/bloc/skills_bloc.dart';
-import 'package:skill_tree/skills/widgets/widgets.dart';
+import 'package:skill_tree/skills/view/skills_list.dart';
 import 'package:skills_api/models/models.dart';
 import 'package:skills_repository/skills_repository.dart';
 
@@ -88,30 +87,6 @@ class SkillsView extends StatelessWidget {
             );
         }
       },
-    );
-  }
-}
-
-class SkillsList extends StatelessWidget {
-  const SkillsList({required this.skills, super.key});
-
-  final List<Skill> skills;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          context.l10n.skillsAppBarTitle,
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-      ),
-      body: ListView.builder(
-        itemCount: skills.length,
-        itemBuilder: (context, index) => SkillListTile(
-          skill: skills[index],
-        ),
-      ),
     );
   }
 }
