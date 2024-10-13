@@ -16,12 +16,24 @@ class TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => context.read<HomeCubit>().setTab(value),
-      color:
-          groupValue == value ? Theme.of(context).colorScheme.secondary : null,
-      iconSize: 32,
-      icon: icon,
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: groupValue == value
+            ? Border.all(
+                width: 2,
+                color: Theme.of(context).colorScheme.primary,
+              )
+            : null,
+      ),
+      child: IconButton(
+        onPressed: () => context.read<HomeCubit>().setTab(value),
+        color: groupValue == value
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.secondary,
+        iconSize: 32,
+        icon: icon,
+      ),
     );
   }
 }

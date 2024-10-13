@@ -10,6 +10,7 @@ class SkillDescriptionInput extends StatelessWidget {
     return BlocBuilder<CreateSkillBloc, CreateSkillState>(
       builder: (context, state) {
         return TextFormField(
+          initialValue: state.description,
           decoration: const InputDecoration(
             hintText: 'Description',
           ),

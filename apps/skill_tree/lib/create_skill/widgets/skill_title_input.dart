@@ -10,6 +10,7 @@ class SkillTitleInput extends StatelessWidget {
     return BlocBuilder<CreateSkillBloc, CreateSkillState>(
       builder: (context, state) {
         return TextFormField(
+          initialValue: state.title,
           decoration: InputDecoration(
             hintText: 'Title',
             errorText: (state.title.isEmpty || state.title.length < 3)

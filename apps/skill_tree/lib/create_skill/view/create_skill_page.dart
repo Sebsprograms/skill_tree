@@ -2,24 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skill_tree/create_skill/bloc/create_skill_bloc.dart';
 import 'package:skill_tree/create_skill/widgets/widgets.dart';
+import 'package:skills_api/models/models.dart';
 import 'package:skills_repository/skills_repository.dart';
 
 class CreateSkillPage extends StatelessWidget {
-  const CreateSkillPage({super.key});
+  const CreateSkillPage({this.initialSkill, super.key});
+
+  final Skill? initialSkill;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateSkillBloc(
         skillsRepository: context.read<SkillsRepository>(),
+        initialSkill: initialSkill,
       ),
-      child: const CreateSkillView(),
+      child: CreateSkillView(
+        initialSkill: initialSkill,
+      ),
     );
   }
 }
 
 class CreateSkillView extends StatelessWidget {
-  const CreateSkillView({super.key});
+  const CreateSkillView({this.initialSkill, super.key});
+  final Skill? initialSkill;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,13 @@ class CreateSkillView extends StatelessWidget {
       child: Form(
         child: Column(
           children: [
+            Text(
+              initialSkill == null ? 'Create Skill' : 'Edit Skill',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             const Expanded(
               child: SingleChildScrollView(
                 child: Column(
