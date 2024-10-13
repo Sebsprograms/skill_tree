@@ -13,6 +13,9 @@ class SkillsRepository {
   /// Stream of Skills
   Stream<List<Skill>> getSkills() => _skillsApi.getSkills();
 
+  /// Stream of 1 Skill by id
+  Stream<Skill?> getSkillById(String id) => _skillsApi.getSkillById(id);
+
   /// Deletes a skill using an id
   Future<void> deleteSkill(String id) => _skillsApi.deleteSkill(id);
 

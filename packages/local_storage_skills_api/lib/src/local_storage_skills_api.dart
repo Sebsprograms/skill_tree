@@ -52,6 +52,20 @@ class LocalStorageSkillsApi extends SkillsApi {
   Stream<List<Skill>> getSkills() => _skillStreamController.asBroadcastStream();
 
   @override
+  Stream<Skill?> getSkillById(String id) {
+    return _skillStreamController.stream.map((skills) {
+      Skill? matchedSkill;
+      for (final skill in skills) {
+        if (skill.id == id) {
+          matchedSkill = skill;
+        }
+      }
+
+      return matchedSkill;
+    });
+  }
+
+  @override
   Future<void> saveSkill(Skill skill) {
     final skills = [..._skillStreamController.value];
     final skillIndex = skills.indexWhere((s) => s.id == skill.id);

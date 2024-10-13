@@ -8,6 +8,9 @@ abstract class SkillsApi {
   /// Stream of skills
   Stream<List<Skill>> getSkills();
 
+  /// Stream of 1 skill by id
+  Stream<Skill?> getSkillById(String id);
+
   /// Delete a skill
   Future<void> deleteSkill(String id);
 
