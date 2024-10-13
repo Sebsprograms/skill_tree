@@ -47,13 +47,11 @@ class ViewSkillView extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            if (state.isEditMode) {
-              return const EditSkill();
-            } else {
-              return ViewSkill(
-                skill: state.skill!,
-              );
-            }
+
+            return ViewSkill(
+              skill: state.skill!,
+            );
+
           case ViewSkillStatus.error:
             return const Center(
               child: Text('Something went wrong.'),

@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:skill_tree/utils/color_helpers.dart';
 import 'package:skills_api/models/models.dart';
-import 'package:skills_api/models/skill.dart';
 import 'package:skills_repository/skills_repository.dart';
 
 part 'create_skill_event.dart';
@@ -16,14 +13,22 @@ part 'create_skill_state.dart';
 class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
   CreateSkillBloc({
     required SkillsRepository skillsRepository,
+    Skill? initialSkill,
   })  : _skillsRepository = skillsRepository,
-        super(CreateSkillState(
-          color: Colors.blue,
-          title: '',
-          description: '',
-          progressDifficulty: ProgressDifficulty.medium,
-          isValid: false,
-        )) {
+        _initialSkill = initialSkill,
+        super(
+          CreateSkillState(
+            id: initialSkill?.id,
+            color: initialSkill == null
+                ? Colors.blue
+                : hexToColor(initialSkill.colorCode),
+            title: initialSkill?.title ?? '',
+            description: initialSkill?.description ?? '',
+            progressDifficulty:
+                initialSkill?.progressDifficulty ?? ProgressDifficulty.medium,
+            isValid: initialSkill != null,
+          ),
+        ) {
     on<TitleChanged>(_titleChanged);
     on<DescriptionChanged>(_descriptionChanged);
     on<ColorChanged>(_colorChanged);
@@ -32,6 +37,7 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
   }
 
   final SkillsRepository _skillsRepository;
+  final Skill? _initialSkill;
 
   FutureOr<void> _titleChanged(
     TitleChanged event,
@@ -97,11 +103,27 @@ class CreateSkillBloc extends Bloc<CreateSkillEvent, CreateSkillState> {
     FormSubmitted event,
     Emitter<CreateSkillState> emit,
   ) async {
-    final newSkill = Skill(
-      colorCode: colorToHex(state.color),
-      title: state.title,
-      description: state.description,
-    );
+    Skill? newSkill;
+
+    if (_initialSkill == null) {
+      newSkill = Skill(
+        colorCode: colorToHex(state.color),
+        title: state.title,
+        description: state.description,
+        progressDifficulty: state.progressDifficulty,
+      );
+    } else {
+      newSkill = Skill(
+        id: _initialSkill.id,
+        colorCode: colorToHex(state.color),
+        title: state.title,
+        description: state.description,
+        progressDifficulty: state.progressDifficulty,
+        currentExp: _initialSkill.currentExp,
+        currentLevel: _initialSkill.currentLevel,
+        requiredExpToNextLevel: _initialSkill.requiredExpToNextLevel,
+      );
+    }
 
     try {
       await _skillsRepository.saveSkill(newSkill);
