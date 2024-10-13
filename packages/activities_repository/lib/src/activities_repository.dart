@@ -17,7 +17,8 @@ class ActivitiesRepository {
       _activitiesApi.getActivitiesRelatedToSkill(skillId);
 
   /// Save an Activity
-  Future<void> saveActivity(Activity task) => _activitiesApi.saveActivity(task);
+  Future<void> saveActivity(Activity activity) =>
+      _activitiesApi.saveActivity(activity);
 
   /// Delete an Activity
   Future<void> deleteActivity(String id) => _activitiesApi.deleteActivity(id);

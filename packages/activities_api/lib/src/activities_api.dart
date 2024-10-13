@@ -15,8 +15,11 @@ abstract class ActivitiesApi {
   Future<void> deleteActivity(String id);
 
   /// Save an Activity
-  Future<void> saveActivity(Activity task);
+  Future<void> saveActivity(Activity activity);
 
   /// Close the connection to the API
   Future<void> close();
 }
+
+/// Exception thrown when an Activity is not found
+class ActivityNotFoundException implements Exception {}

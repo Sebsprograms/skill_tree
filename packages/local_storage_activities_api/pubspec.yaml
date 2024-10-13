@@ -8,8 +8,12 @@ environment:
   flutter: ^3.24.0
 
 dependencies:
+  activities_api:
+    path: ../activities_api
   flutter:
     sdk: flutter
+  rxdart: ^0.28.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
