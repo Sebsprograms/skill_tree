@@ -35,3 +35,8 @@ final class UpdateSkill extends ViewSkillEvent {
         updatedSkill,
       ];
 }
+
+final class DeleteSkill extends ViewSkillEvent {
+  @override
+  List<Object> get props => [];
+}

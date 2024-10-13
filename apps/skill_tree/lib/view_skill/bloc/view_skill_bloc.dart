@@ -17,6 +17,7 @@ class ViewSkillBloc extends Bloc<ViewSkillEvent, ViewSkillState> {
         _skillId = skillId,
         super(const ViewSkillState()) {
     on<InitializeData>(_initializeData);
+    on<DeleteSkill>(_deleteSkill);
   }
 
   final SkillsRepository _skillsRepository;
@@ -41,6 +42,21 @@ class ViewSkillBloc extends Bloc<ViewSkillEvent, ViewSkillState> {
       );
     } catch (e) {
       emit(state.copyWith(status: ViewSkillStatus.error));
+    }
+  }
+
+  FutureOr<void> _deleteSkill(
+    DeleteSkill event,
+    Emitter<ViewSkillState> emit,
+  ) async {
+    emit(state.copyWith(status: ViewSkillStatus.loading));
+    try {
+      await _skillsRepository.deleteSkill(_skillId);
+      emit(state.copyWith(status: ViewSkillStatus.loaded));
+    } catch (e) {
+      emit(
+        state.copyWith(status: ViewSkillStatus.error),
+      );
     }
   }
 }
