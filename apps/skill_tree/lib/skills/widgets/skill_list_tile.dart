@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skill_tree/skills/widgets/exp_bar.dart';
 import 'package:skill_tree/skills/widgets/level_indicator.dart';
+import 'package:skill_tree/view_skill/view/view.dart';
 import 'package:skills_api/models/skill.dart';
 
 class SkillListTile extends StatelessWidget {
@@ -15,7 +16,9 @@ class SkillListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        // Navigate to Skill Details
+        Navigator.of(context).push(
+          ViewSkillPage.route(skillId: skill.id),
+        );
       },
       leading: LevelIndicator(
         level: skill.currentLevel,
