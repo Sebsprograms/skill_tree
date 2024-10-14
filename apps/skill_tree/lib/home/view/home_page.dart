@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skill_tree/activities/view/activities_page.dart';
 import 'package:skill_tree/home/cubit/home_cubit.dart';
 import 'package:skill_tree/home/widgets/tab_button.dart';
 import 'package:skill_tree/l10n/l10n.dart';
@@ -30,9 +31,7 @@ class HomeView extends StatelessWidget {
           Center(
             child: Text(context.l10n.tasksAppBarTitle),
           ),
-          Center(
-            child: Text(context.l10n.activitiesAppBarTitle),
-          ),
+          const ActivitiesPage(),
           const SkillsPage(),
           Center(
             child: Text(context.l10n.statisticsAppBarTitle),
