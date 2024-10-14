@@ -50,7 +50,7 @@ class CreateActivityBloc
       _skillsRepository.getSkills(),
       onData: (data) => state.copyWith(
         skills: data,
-        status: CreateActivityStatus.loading,
+        status: CreateActivityStatus.loaded,
       ),
       onError: (error, stackTrace) => state.copyWith(
         status: CreateActivityStatus.error,
