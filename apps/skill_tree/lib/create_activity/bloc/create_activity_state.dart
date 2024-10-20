@@ -10,48 +10,40 @@ enum CreateActivityStatus {
 final class CreateActivityState extends Equatable {
   const CreateActivityState({
     this.status = CreateActivityStatus.initial,
-    this.skills = const [],
     this.title = '',
     this.cooldown = const Duration(minutes: 15),
-    this.activityLinkedSkills = const [],
+    this.linkableSkills = const [],
     this.isValid = false,
   });
 
   final CreateActivityStatus status;
-  final List<Skill> skills;
-
-  // Form data
+  final List<LinkableSkillState> linkableSkills;
   final String title;
   final Duration cooldown;
-  final List<ActivityLinkedSkill> activityLinkedSkills;
-
-  // Validation
   final bool isValid;
 
   CreateActivityState copyWith({
     CreateActivityStatus? status,
-    List<Skill>? skills,
     String? title,
     Duration? cooldown,
-    List<ActivityLinkedSkill>? activityLinkedSkills,
+    List<LinkableSkillState>? linkableSkills,
     bool? isValid,
   }) {
     return CreateActivityState(
-      skills: skills ?? this.skills,
       status: status ?? this.status,
       title: title ?? this.title,
       cooldown: cooldown ?? this.cooldown,
-      activityLinkedSkills: activityLinkedSkills ?? this.activityLinkedSkills,
+      linkableSkills: linkableSkills ?? this.linkableSkills,
       isValid: isValid ?? this.isValid,
     );
   }
 
   @override
   List<Object> get props => [
-        skills,
+        isValid,
         status,
         cooldown,
-        activityLinkedSkills,
+        linkableSkills,
         title,
       ];
 }

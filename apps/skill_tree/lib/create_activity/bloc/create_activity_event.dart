@@ -30,14 +30,14 @@ final class CooldownChangedEvent extends CreateActivityEvent {
       ];
 }
 
-final class LinkedSkillsChangedEvent extends CreateActivityEvent {
-  LinkedSkillsChangedEvent(this.activityLinkedSkills);
+final class UpdateLinkedSkillState extends CreateActivityEvent {
+  UpdateLinkedSkillState(this.linkableSkillState);
 
-  final List<ActivityLinkedSkill> activityLinkedSkills;
+  final LinkableSkillState linkableSkillState;
 
   @override
   List<Object> get props => [
-        activityLinkedSkills,
+        linkableSkillState,
       ];
 }
 
