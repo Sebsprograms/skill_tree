@@ -25,11 +25,17 @@ class ActivityCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(4),
-            color: Theme.of(context).colorScheme.primaryContainer,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
             child: Center(
               child: Text(
                 activity.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -37,12 +43,12 @@ class ActivityCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(2.0),
+            padding: const EdgeInsets.all(2),
             child: Wrap(
               children: [
                 ...activity.linkedSkills.map(
                   (linkedSkill) => Padding(
-                    padding: const EdgeInsets.all(2.0),
+                    padding: const EdgeInsets.all(2),
                     child: LinkedSkill(linkedSkill: linkedSkill),
                   ),
                 ),
@@ -51,7 +57,13 @@ class ActivityCard extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.all(4),
-            color: Theme.of(context).colorScheme.primaryContainer,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
             child: Center(
               child: Text(
                 '${activity.cooldown.inMinutes} min',
