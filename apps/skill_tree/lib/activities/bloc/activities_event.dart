@@ -6,3 +6,5 @@ sealed class ActivitiesEvent {}
 final class ActivitiesSubscriptionRequested extends ActivitiesEvent {}
 
 final class SkillsSubscriptionRequested extends ActivitiesEvent {}
+
+final class ActivitiesChangeMode extends ActivitiesEvent {}
