@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:activities_api/activities_api.dart';
+import 'package:activities_repository/activities_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:skill_tree/app/view/app.dart';
@@ -24,7 +26,10 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-void bootstrap({required SkillsApi skillsApi}) {
+void bootstrap({
+  required SkillsApi skillsApi,
+  required ActivitiesApi activitiesApi,
+}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -37,10 +42,13 @@ void bootstrap({required SkillsApi skillsApi}) {
   Bloc.observer = const AppBlocObserver();
 
   final skillsRepository = SkillsRepository(skillsApi: skillsApi);
+  final activitiesRepository =
+      ActivitiesRepository(activitiesApi: activitiesApi);
 
   runApp(
     App(
       skillsRepository: skillsRepository,
+      activitiesRepository: activitiesRepository,
     ),
   );
 }
