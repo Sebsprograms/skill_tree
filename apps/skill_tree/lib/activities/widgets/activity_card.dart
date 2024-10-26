@@ -14,6 +14,7 @@ class ActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.hardEdge,
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         border: Border.all(
           color: Theme.of(context).primaryColor,

@@ -77,7 +77,16 @@ class CreateActivityView extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text('Linked Skill(s)'),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Linked Skill(s)'),
+                                Text('XP reward'),
+                              ],
+                            ),
+                          ),
                           SizedBox(
                             height: 4,
                           ),
