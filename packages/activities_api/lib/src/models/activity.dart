@@ -53,7 +53,13 @@ class Activity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        id,
+        title,
+        linkedSkills,
+        cooldown,
+        lastUsed,
+      ];
 
   /// Converts a JSON map into a [Activity] instance.
   factory Activity.fromJson(Map<String, dynamic> json) =>
