@@ -45,3 +45,10 @@ final class ActivityFormSubmittedEvent extends CreateActivityEvent {
   @override
   List<Object> get props => [];
 }
+
+final class ActivityDeletedEvent extends CreateActivityEvent {
+  ActivityDeletedEvent(this.id);
+  final String id;
+  @override
+  List<Object> get props => [id];
+}

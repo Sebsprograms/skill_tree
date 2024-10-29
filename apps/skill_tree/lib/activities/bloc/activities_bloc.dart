@@ -20,6 +20,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
         super(const ActivitiesState()) {
     on<ActivitiesSubscriptionRequested>(_activitiesSubscriptionRequested);
     on<SkillsSubscriptionRequested>(_skillsSubscriptionRequested);
+    on<ActivitiesChangeMode>(_activitiesChangeMode);
   }
 
   final ActivitiesRepository _activitiesRepository;
@@ -55,6 +56,15 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       ),
       onError: (error, stackTrace) => state.copyWith(
         status: ActivitiesStatus.error,
+      ),
+    );
+  }
+
+  FutureOr<void> _activitiesChangeMode(
+      ActivitiesChangeMode event, Emitter<ActivitiesState> emit) {
+    emit(
+      state.copyWith(
+        mode: state.mode == Mode.edit ? Mode.score : Mode.edit,
       ),
     );
   }

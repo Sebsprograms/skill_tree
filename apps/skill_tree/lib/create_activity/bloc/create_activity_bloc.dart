@@ -33,6 +33,7 @@ class CreateActivityBloc
     on<CooldownChangedEvent>(_cooldownChanged);
     on<UpdateLinkedSkillState>(_updateLinkedSkillState);
     on<ActivityFormSubmittedEvent>(_formSubmitted);
+    on<ActivityDeletedEvent>(_activityDeleted);
   }
 
   final SkillsRepository _skillsRepository;
@@ -61,12 +62,25 @@ class CreateActivityBloc
   List<LinkableSkillState> buildLinkableSkills(List<Skill> skills) {
     final linkableSkills = List<LinkableSkillState>.empty(growable: true);
     for (final skill in skills) {
-      linkableSkills.add(LinkableSkillState(
-        isSelected: false,
-        linkedSkilldata: ActivityLinkedSkill(skillId: skill.id, xpReward: 5),
-        skill: skill,
-        skillId: skill.id,
-      ));
+      bool isSelected = false;
+      int xpReward = 5;
+      for (final ActivityLinkedSkill linkableSkill
+          in _initialActivity?.linkedSkills ?? []) {
+        if (linkableSkill.skillId == skill.id) {
+          isSelected = true;
+          xpReward = linkableSkill.xpReward;
+        }
+      }
+
+      linkableSkills.add(
+        LinkableSkillState(
+          isSelected: isSelected,
+          linkedSkilldata:
+              ActivityLinkedSkill(skillId: skill.id, xpReward: xpReward),
+          skill: skill,
+          skillId: skill.id,
+        ),
+      );
     }
     return linkableSkills;
   }
@@ -173,5 +187,10 @@ class CreateActivityBloc
         ),
       ),
     );
+  }
+
+  FutureOr<void> _activityDeleted(
+      ActivityDeletedEvent event, Emitter<CreateActivityState> emit) async {
+    await _activitiesRepository.deleteActivity(event.id);
   }
 }

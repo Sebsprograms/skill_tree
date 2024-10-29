@@ -35,11 +35,11 @@ class LocalStorageActivitiesApi extends ActivitiesApi {
     final activitiesJson = _getValue(kActivitiesCollectionKey);
 
     if (activitiesJson != null) {
-      final activites =
+      final activities =
           List<Map<String, dynamic>>.from(json.decode(activitiesJson) as List)
               .map((e) => Activity.fromJson(Map<String, dynamic>.from(e)))
               .toList();
-      _activitiesStreamController.add(activites);
+      _activitiesStreamController.add(activities);
     } else {
       _activitiesStreamController.add(const []);
     }

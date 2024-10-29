@@ -61,7 +61,7 @@ class CreateActivityView extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -91,6 +91,61 @@ class CreateActivityView extends StatelessWidget {
                             height: 4,
                           ),
                           CreateActivityLinkedSkills(),
+                          if (initialActivity != null) ...[
+                            SizedBox(
+                              height: 4,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      title: const Text('Confirm Deletion'),
+                                      content: const Text(
+                                        'Are you sure you want to delete this activity?',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(ctx)
+                                                .pop(); // Just close the dialog
+                                          },
+                                          child: const Text('Cancel'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Trigger the events only if the user presses "OK"
+                                            context
+                                                .read<CreateActivityBloc>()
+                                                .add(
+                                                  ActivityDeletedEvent(
+                                                      initialActivity!.id),
+                                                );
+                                            Navigator.of(ctx)
+                                                .pop(); // Close the dialog
+                                            Navigator.of(context)
+                                                .pop(); // Return to previous screen
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ]
                         ],
                       ),
                     ),

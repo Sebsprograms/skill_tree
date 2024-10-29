@@ -35,6 +35,20 @@ class ActivitiesView extends StatelessWidget {
           context.l10n.activitiesAppBarTitle,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
+        actions: [
+          BlocBuilder<ActivitiesBloc, ActivitiesState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  context.read<ActivitiesBloc>().add(ActivitiesChangeMode());
+                },
+                icon: Icon(
+                  state.mode == Mode.score ? Icons.create_rounded : Icons.close,
+                ),
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
