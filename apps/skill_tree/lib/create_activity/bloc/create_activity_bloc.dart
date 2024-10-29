@@ -33,6 +33,7 @@ class CreateActivityBloc
     on<CooldownChangedEvent>(_cooldownChanged);
     on<UpdateLinkedSkillState>(_updateLinkedSkillState);
     on<ActivityFormSubmittedEvent>(_formSubmitted);
+    on<ActivityDeletedEvent>(_activityDeleted);
   }
 
   final SkillsRepository _skillsRepository;
@@ -186,5 +187,10 @@ class CreateActivityBloc
         ),
       ),
     );
+  }
+
+  FutureOr<void> _activityDeleted(
+      ActivityDeletedEvent event, Emitter<CreateActivityState> emit) async {
+    await _activitiesRepository.deleteActivity(event.id);
   }
 }
