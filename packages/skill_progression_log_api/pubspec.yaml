@@ -1,0 +1,19 @@
+name: skill_progression_log_api
+description: Skill Progression log api
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dev_dependencies:
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
+  mocktail: ^1.0.4
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0
+dependencies:
+  uuid: ^4.5.1
+  json_annotation: ^4.9.0
+  equatable: ^2.0.5
+  meta: ^1.15.0
