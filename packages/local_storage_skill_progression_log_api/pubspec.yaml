@@ -1,0 +1,20 @@
+name: local_storage_skill_progression_log_api
+description: Skill Progression log local storage
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  skill_progression_log_api:
+    path: ../skill_progression_log_api
+  skills_repository:
+    path: ../skills_repository
+  rxdart: ^0.28.0
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  mocktail: ^1.0.4
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0
